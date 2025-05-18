@@ -24,5 +24,5 @@ cd ../..
 ```
 
 ```bash
-uv run tracklab -cn soccernet
+conda run tracklab -cn soccernet
 ```
