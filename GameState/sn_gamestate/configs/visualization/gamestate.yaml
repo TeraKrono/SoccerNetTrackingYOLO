@@ -1,0 +1,21 @@
+defaults:
+  - colors_gs
+
+_target_: tracklab.visualization.VisualizationEngine
+save_videos: True
+
+visualizers:
+  frame_counter:
+    _target_: tracklab.visualization.FrameCount
+  pitch:
+    _target_: sn_gamestate.visualization.Pitch
+  players:
+    _target_: sn_gamestate.visualization.CompletePlayerEllipse
+  radar:
+    _target_: sn_gamestate.visualization.Radar
+
+colors:
+  default:
+    no_id: null
+    prediction: "team"
+    ground_truth: null

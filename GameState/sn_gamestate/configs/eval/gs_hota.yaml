@@ -1,0 +1,27 @@
+_target_: tracklab.wrappers.TrackEvalEvaluator
+
+show_progressbar: True
+eval_set: ${dataset.eval_set}
+dataset_path: ${dataset.dataset_path}
+
+cfg:
+  save_gt: False
+  bbox_column_for_eval: "bbox_ltwh"
+  metrics:
+    - "CLEAR"
+    - "HOTA"
+    - "Identity"
+  eval:
+    USE_PARALLEL: True
+    NUM_PARALLEL_CORES: ${num_cores}
+    BREAK_ON_ERROR: False
+    PRINT_RESULTS: True
+    PRINT_ONLY_COMBINED: True
+    PRINT_CONFIG: False
+    TIME_PROGRESS: False
+    DISPLAY_LESS_PROGRESS: False
+    OUTPUT_SUMMARY: True
+    OUTPUT_EMPTY_CLASSES: False
+    OUTPUT_DETAILED: True
+    PLOT_CURVES: True
+  dataset: ${dataset.track_eval}

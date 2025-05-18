@@ -1,0 +1,105 @@
+_target_: sn_gamestate.reid.prtreid_api.PRTReId
+
+defaults:
+  - dataset: prtreid_dataset
+
+batch_size: 32
+job_id: "${oc.env:SLURM_JOBID,0}"
+save_path: reid
+use_keypoints_visibility_scores_for_reid: False
+training_enabled: False
+cfg:
+  project:
+    name: "TrackLab"
+    experiment_name: ""
+    notes: ""
+    tags: []
+    logger:
+      use_tensorboard: False
+      use_wandb: False
+  data:
+    root: "${data_dir}/reid"
+    type: "image"
+    sources: ["SoccerNet"]
+    targets: ["SoccerNet"]
+    height: 256
+    width: 128
+    combineall: False
+    transforms: ["rc", "re"]
+    save_dir: ""
+    workers: ${num_cores}
+
+  sampler:
+    train_sampler: PrtreidSampler
+    train_sampler_t: PrtreidSampler
+    num_instances: 4
+
+  model:
+    name: "bpbreid"
+    pretrained: True
+    save_model_flag: True
+    load_config: True
+    load_weights: "${model_dir}/reid/prtreid-soccernet-baseline.pth.tar"
+    bpbreid:
+      pooling: "gwap"
+      normalization: "identity"
+      mask_filtering_training: False
+      mask_filtering_testing: False
+      training_binary_visibility_score: True
+      testing_binary_visibility_score: True
+      last_stride: 1
+      learnable_attention_enabled: False
+      dim_reduce: "after_pooling"
+      dim_reduce_output: 256
+      backbone: "hrnet32"
+      test_embeddings: ["globl"]
+      test_use_target_segmentation: "none"
+      shared_parts_id_classifier: False
+      hrnet_pretrained_path: "${model_dir}/reid"
+      masks:
+        type: "disk"
+        dir: "${.....dataset.masks_mode}"
+        preprocess: "id"
+
+  loss:
+    name: 'part_based'
+    part_based:
+      name: 'part_averaged_triplet_loss'
+      ppl: 'cl'
+      weights:
+        globl:
+          id: 1.
+          tr: 1.
+        foreg:
+          id: 0.
+          tr: 0.
+        conct:
+          id: 0.
+          tr: 0.
+        parts:
+          id: 0.
+          tr: 0.
+        pixls:
+          ce: 0.
+
+  train:
+    batch_size: 32
+    max_epoch: 20
+
+  test:
+    evaluate: True
+    detailed_ranking: False
+    start_eval: 40
+    batch_size: 64
+    batch_size_pairwise_dist_matrix: 5000
+    normalize_feature: True
+    dist_metric: "euclidean"
+    visrank: True
+    visrank_per_body_part: False
+    vis_embedding_projection: False
+    vis_feature_maps: False
+    visrank_topk: 10
+    visrank_count: 4
+    visrank_q_idx_list: []
+    part_based:
+      dist_combine_strat: mean
