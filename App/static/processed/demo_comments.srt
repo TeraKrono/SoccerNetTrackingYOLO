@@ -1,0 +1,15 @@
+1
+00:00:05,000 --> 00:00:07,000
+Player 7 made a great pass!
+
+2
+00:00:10,000 --> 00:00:12,000
+Shot on target by Player 10.
+
+3
+00:00:15,000 --> 00:00:17,000
+Goal scored! Amazing finish.
+
+4
+00:00:25,000 --> 00:00:27,000
+Yellow card for Player 3.

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Match Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1> Football Match Analyzer</h1>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label class="upload-label" for="videoInput">Choose your football match video</label>
+        <input type="file" id="videoInput" name="video" accept="video/*" required>
+
+        <div class="button-group">
+            <button type="submit" id="uploadButton" class="btn upload-btn"> Upload</button>
+            <button type="button" id="analyzeButton" class="btn analyze-btn" disabled> Analyze</button>
+        </div>
+    </form>
+
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Processing your video, please wait...</p>
+    </div>
+
+    <div id="videoSection" style="display: none;">
+        <video id="videoPlayer" controls>
+            <source src="" type="video/mp4">
+            <track src="" kind="subtitles" srclang="en" label="Comments" default>
+        </video>
+        <div id="commentBox"></div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+input[type="file"] {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#videoPlayer {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+#commentBox {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-left: 6px solid #007bff;
+    border-radius: 10px;
+    font-size: 24px; /* Bigger text */
+    font-weight: bold;
+    min-height: 60px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Smooth fade */
+}
+
+
+/* Loading spinner */
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading p {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #218838;
+}
+
+.analyze-btn {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.analyze-btn:disabled {
+    background-color: #e0a800;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.analyze-btn:hover:not(:disabled) {
+    background-color: #d39e00;
+}
